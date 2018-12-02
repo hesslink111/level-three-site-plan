@@ -1,32 +1,49 @@
-import kotlinx.html.classes
+import kotlinx.html.js.onClickFunction
+import react.*
 import react.dom.*
 import kotlin.browser.document
 
 fun main(args: Array<String>) {
     render(document.getElementById("react-root")) {
-        div {
+        app()
+    }
+}
+
+class App: RComponent<RProps, App.State>() {
+
+    interface State: RState {
+        var page: String
+    }
+
+    init {
+        state = object: State {
+            override var page = "contact"
+        }
+    }
+
+    override fun RBuilder.render() {
+        topHeader()
+        topHeader()
+        topHeader()
+        topHeader()
+
+        button {
+            +"Change page"
             attrs {
-                classes = setOf("container")
-            }
-
-            div {
-                attrs {
-                    classes = setOf("level")
-                }
-                div {
-                    attrs {
-                        classes = setOf("column")
+                onClickFunction = {
+                    setState {
+                        page = if(state.page == "contact") "address" else "contact"
                     }
-                    contactInput()
-                }
-
-                div {
-                    attrs {
-                        classes = setOf("column")
-                    }
-                    addressInput()
                 }
             }
         }
+
+        if(state.page == "contact") {
+            contactInput()
+        } else {
+            addressInput()
+        }
     }
 }
+
+fun RBuilder.app() = child(App::class) {}

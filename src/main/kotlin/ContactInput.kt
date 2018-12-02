@@ -8,15 +8,18 @@ import react.dom.h3
 import react.dom.section
 
 class ContactInput: RComponent<RProps, RState>() {
+
+    override fun componentDidMount() {
+        println("Contacts appeared")
+    }
+
+    override fun componentWillUnmount() {
+        println("Contacts went away")
+    }
+
     override fun RBuilder.render() {
         section {
-            attrs {
-                classes = setOf("section")
-            }
             h3 {
-                attrs {
-                    classes = setOf("title is-4")
-                }
                 +"Contact"
             }
             formField(label = "First Name", placeHolder = "Enter first name", inputType = InputType.text)

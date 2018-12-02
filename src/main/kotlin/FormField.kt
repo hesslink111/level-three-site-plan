@@ -1,6 +1,4 @@
 import kotlinx.html.InputType
-import kotlinx.html.classes
-import kotlinx.html.id
 import react.RBuilder
 import react.RComponent
 import react.RProps
@@ -17,30 +15,13 @@ class FormField: RComponent<FormField.Props, RState>() {
         var inputType: InputType
     }
 
-    private val fieldId = generateUuid()
-
     override fun RBuilder.render() {
         div {
-            attrs {
-                classes = setOf("field")
-            }
-
             label {
-                attrs {
-                    htmlFor = fieldId
-                    classes = setOf("label is-small")
-                }
                 +props.label
-            }
-            div {
-                attrs {
-                    classes = setOf("control")
-                }
                 input {
                     attrs {
-                        id = fieldId
-                        type = InputType.text
-                        classes = setOf("input is-small")
+                        type = props.inputType
                         placeholder = props.placeHolder
                     }
                 }
